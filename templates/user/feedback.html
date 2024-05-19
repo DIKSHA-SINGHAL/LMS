@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Feedback
+{% endblock %}
+
+{% block content %}
+    <h1>Help us with your Feedback</h1>
+    <br><br>
+    <form action="{{url_for('feedback', id=book.id)}}" method="post" class="form">
+        <div class="form-group">
+            <label for="rating" class="form-label">Did you like {{book.title}} : </label>
+            <select class="form-select" id="rating" name="rating" aria-label="Default select example">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option selected value="5">5</option>
+              </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="content" class="form-label">Any additional comments?</label>
+            <textarea id="content" name="content" class="form-control" required></textarea>
+        </div>
+        <br>
+        <button class="btn btn-success">Submit</button>
+    </form>
+{% endblock %}

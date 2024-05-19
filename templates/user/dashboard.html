@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home : LMS
+{% endblock %}
+
+{% block content %}
+  <div class="bar">
+    # A user can issue maximum of 5 books at a time | # A book can be requested for maximum of 7 days
+  </div>
+  {% include 'user/search.html' %}
+  <hr>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for book in books %}
+      {% if (not bname) or (bname.lower() in book.title.lower()) %}
+        {% if (not sname) or (sname.lower() in book.section.name.lower()) %}
+          {% if (not aname) or (aname.lower() in book.author.lower()) %}
+            {% if (not price) or (book.price <= price) %}
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h1 class="card-title">{{book.title}}</h1>
+                  <p class="card-text">{{book.content}}</p>
+                  <h5 class="card-text">Author: {{book.author}}</h5>
+                  <h5 class="card-text">Section: {{book.section.name}}</h5>
+                  <h5 class="card-text">Price: {{'\u20B9'}}{{book.price}}</h5>
+                  {% if book.rating %}
+                    <h5 class="card-text">Rating: {{book.rating}} <i class="fas fa-star" style="color: #FFD700"></i></h5>
+                  {% endif %}
+                  
+                </div>
+                <div class="card-footer">
+                  <form action="{{url_for('request_access_post', id=book.id)}}" method="post" class="form d-flex justify-content-between">
+                    <div class="form-group">
+                      <label for="duration" class="form-label"><h4>Duration:</h4></label>
+                      <input type="number" name="duration" id="duration" min="1" max="7" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" value="Request Access" class="btn btn-success">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block style %}
+<style>
+  .bar {
+      padding: 15px;
+      background-color: rgb(146, 189, 191);
+      margin-bottom: 15px;
+      text-align: center;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home : LMS
+{% endblock %}
+
+{% block content %}
+  <!-- SEARCH BAR-->
+  <div class="d-flex justify-content-between">
+    <h1>Sections</h1>
+    <form action="" method="get">
+        <div class="form-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Search">
+        </div>
+    </form>
+  </div>
+  {% if sections %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for section in sections %}
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <a href="{{url_for('explore_section', id=section.id)}}" style="text-decoration:none" class="card-body">
+              <div class="d-flex justify-content-between">
+                <h1 class="card-title">{{section.name}}</h1>
+                <form action="{{url_for('delete_section', id=section.id)}}" method="post">
+                  <button class="btn btn-outline-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+                <p class="card-text">{{section.description}}</p>
+                <h5 class="card-text">{{section.date_created}}</h5>
+              </a>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <a href="{{url_for('update_section', id=section.id)}}" class="btn btn-success">Update</a>
+              <a href="{{url_for('add_book', id=section.id)}}" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+                Add Book
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  {% else %}
+    <h3>Add Sections to view</h3>
+  {% endif %}
+    <h3 class="text-center">
+      <a href="{{url_for('add_section')}}" class="btn btn-success">
+          <i class="fas fa-plus"></i>
+          Add Section
+      </a>
+    </h3>
+{% endblock %}

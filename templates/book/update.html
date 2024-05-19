@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Update Book
+{% endblock %}
+
+{% block content %}
+    <h1>Update Book</h1>
+    <form action="{{url_for('update_book', id=book.id)}}" method="post" class="form">
+        <div class="form-group">
+            <label for="title" class="form-label">Title : </label>
+            <input type="text" name="title" id="title" value="{{book.title}}" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="section_id" class="form-label">Section :</label>
+            <select name="section_id" id="section_id" class="form-control" required>
+                {% for section in sections %}
+                {% if section.id == book.section_id %}
+                    <option selected value="{{section.id}}">{{section.name}}</option>
+                {% else %}
+                    <option value="{{section.id}}">{{section.name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="content" class="form-label">Content : </label>
+            <textarea name="content" id="content" required class="form-control">{{book.content}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="author" class="form-label">Author : </label>
+            <input type="text" name="author" id="author" value="{{book.author}}" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="price" class="form-label">Price : </label>
+            <input type="number" name="price" id="price" min="50" placeholder="{{'\u20B9'}}" value="{{book.price}}" required class="form-control">
+        </div>
+        <button class="btn btn-success">Submit</button>
+    </form>
+{% endblock %}

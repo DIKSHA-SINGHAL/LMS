@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Stats
+{% endblock %}
+
+{% block content %}
+    <h1>Summary:</h1>
+    <br>
+    <div class="chart-container" style="height:60vh; width:95vw; display:flex; justify-content:space-around">
+        <canvas id="bar_chart"></canvas>
+        <canvas id="doughnut"></canvas>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        let labelsA = {{book_names | safe}};
+        let itemDataA = {{book_sizes | safe}};
+        const dataA = {
+            labels: labelsA,
+            datasets: [{
+                label: '# users',
+                data: itemDataA,
+                borderWidth: 1
+            }]
+        };
+
+        const ctxA = document.getElementById('bar_chart');
+        const configA = {
+            type: 'bar',
+            data: dataA,
+            options: {
+                scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                      display: true,
+                      text: 'Books Issued',
+                    }
+                    
+                }
+            }
+        };
+
+        const chartA = new Chart(ctxA, configA);   
+        
+
+        let labelsB = {{section_names | safe}};
+        let itemDataB = {{section_sizes | safe}};
+        const dataB = {
+            labels: labelsB,
+            datasets: [{
+                label: 'Distribution of Books',
+                data: itemDataB,
+                borderWidth: 1
+            }]
+        };
+
+        const ctxB = document.getElementById('doughnut');
+        const configB = {
+            type: 'doughnut',
+            data: dataB,
+            options: {
+                plugins: {
+                  title: {
+                    display: true,
+                    text: 'Section Distribution',
+                  }
+                }
+            }
+        };
+
+        const chartB = new Chart(ctxB, configB);  
+    </script>
+{% endblock %}

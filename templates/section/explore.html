@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{section.name}}
+{% endblock %}
+
+{% block content %}
+    <!--SEARCH BAR-->
+    <div class="d-flex justify-content-between">
+      <h1>{{section.name}} Section</h1>
+      <form action="" method="get">
+          <div class="form-group">
+              <input type="text" name="name" id="name" class="form-control" placeholder="Search">
+          </div>
+      </form>
+    </div>
+    <hr>
+    {% if section.books %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for book in section.books %}
+          {% if (name=='') or (name.lower() in book.title.lower()) or (name.lower() in book.author.lower()) %}
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h1 class="card-title">{{book.title}}</h1>
+                  <form action="{{url_for('delete_book', id=book.id)}}" method="post">
+                    <button class="btn btn-outline-danger">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </form>
+                </div>
+                <p class="card-text">{{book.content}}</p>
+                <h5 class="card-text">Author: {{book.author}}</h5>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <h5 class="card-text">Price: {{'\u20B9'}}{{book.price}}</h5>
+                <a href="{{url_for('update_book', id=book.id)}}" class="btn btn-success">
+                    Update
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+      <h3>Add Books to view</h3>
+    {% endif %}
+    <h3 class="text-center">
+      <a href="{{url_for('add_book', id=section.id)}}" class="btn btn-success">
+        <i class="fas fa-plus"></i>
+        Add Book
+      </a>
+    </h3>
+{% endblock %}

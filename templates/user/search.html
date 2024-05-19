@@ -1,0 +1,47 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="get">
+                <div class="input-group">
+                    <input type="text"
+                    name="sname"
+                    id="sname"
+                    value="{{sname}}"
+                    class="form-control"
+                    placeholder="Section">
+
+                    <input type="text"
+                    name="bname"
+                    id="bname"
+                    value="{{bname}}"
+                    class="form-control"
+                    placeholder="Book">
+
+                    <input type="text"
+                    name="aname"
+                    id="aname"
+                    value="{{aname}}"
+                    class="form-control"
+                    placeholder="Author">
+
+                    <input type="number"
+                    name="price"
+                    id="price"
+                    value="{{price}}"
+                    class="form-control"
+                    placeholder="Max Price">
+
+                    <a href="{{url_for('user_dashboard')}}" class="btn btn-outline-danger">
+                        <i class="fas fa-trash"></i>
+                        Clear
+                    </a>
+
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

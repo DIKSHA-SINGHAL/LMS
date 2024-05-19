@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    LMS
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;">
+        Hi, Welcome to Library Management System
+    </h1>
+    <br><br>
+    <div class="container" style="display: flex; justify-content: center; align-items: center">
+        <form action="{{url_for('select_role')}}" method="post" class="form" style="width: 200px;">
+            <div class="form-group">
+                <h2 style="text-align: center;">Login as:</h2>
+            </div> <br>
+            <div class="form-group d-flex justify-content-between">
+                <input type="submit" name="user" value="User" class="btn btn-success">
+                <input type="submit" name="admin" value="Librarian" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+    
+{% endblock %}

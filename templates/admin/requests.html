@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Requests
+{% endblock %}
+
+{% block content %}
+<!--SEARCH BAR-->
+<div class="d-flex justify-content-between">
+    <h1>Requests</h1>
+    <form action="" method="get">
+        <div class="form-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Search">
+        </div>
+    </form>
+</div>
+<hr>
+<ol class="list-group list-group-numbered">
+    {% for access in accesses %}
+        {% if (name=='') or (name.lower() in access.book.title.lower()) or (name in access.user_id|string) or (name.lower() in access.status) %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <h5 style="font-weight: normal">
+                        {{access.book.title}} | User__{{access.user_id}} | {{access.status}}
+                    </h5>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ol>
+{% endblock %}

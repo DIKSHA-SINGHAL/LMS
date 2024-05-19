@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{book.title}}
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center; color:rgb(226, 43, 131)">{{book.title}}</h1>
+    <h3 class="text-muted" style="text-align: center;">~ {{book.author}}</h3>
+    <br><br>
+    <div class="content">
+        <em style="font-size: x-large">{{book.content}}</em>
+    </div>
+{% endblock %}

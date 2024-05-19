@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    My Books
+{% endblock %}
+
+{% block content %}
+    <h1>Current</h1>
+    <ol class="list-group list-group-numbered">
+        {% for access in accesses %}
+            {% if access.status == "granted" or access.status == "revoked" %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <h5 style="font-weight: normal">
+                            {{access.book.title}} | {{access.book.author}} | {{access.book.section.name}}
+                        </h5>
+                    </div>
+                    <a href="{{url_for('read_book', id=access.book.id)}}" class="btn btn-success" >
+                        Read
+                    </a>
+                    <a href="{{url_for('return_book', id=access.id)}}" class="btn btn-warning" style="margin-left: 10px;">
+                        Return
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+    <hr>
+    <h1>Completed</h1>
+    <ol class="list-group list-group-numbered">
+        {% for access in accesses %}
+            {% if access.status == "returned" or access.status == "revoked" %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <h5 style="font-weight: normal">
+                            {{access.book.title}} | {{access.book.author}} | {{access.book.section.name}} | {{'\u20B9'}}{{access.book.price}}
+                        </h5>
+                    </div>
+                    <a href="{{url_for('feedback', id=access.book.id)}}" class="btn btn-outline-primary" style="margin: 0 10px;">
+                        Feedback
+                    </a>
+                    <a href="{{url_for('add_to_cart', id=access.book.id)}}" class="btn btn-outline-primary" style="margin-left: 10px;">
+                        Add to Cart
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endblock %}

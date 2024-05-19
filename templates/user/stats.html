@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Stats
+{% endblock %}
+
+{% block content %}
+    <h1>Summary:</h1>
+    <br>
+    <div class="chart-container" style="height: 600px; width: 1000px">
+        <canvas id="line_chart"></canvas>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        let labelsA = {{borrow_dates | safe}};
+        let itemDataA = {{borrow_counts | safe}};
+        const dataA = {
+            labels: labelsA,
+            datasets: [{
+                label: 'Books Borrowed Over Time',
+                data: itemDataA,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const ctxA = document.getElementById('line_chart');
+        const configA = {
+            type: 'line',
+            data: dataA,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const chartA = new Chart(ctxA, configA);
+    </script>
+{% endblock %}

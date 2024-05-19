@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Log In : LMS
+{% endblock %}
+
+{% block content %}
+
+    <h1 style="text-align:center">Librarian's Login</h1>
+    <br> <br>
+    <div class="container" style="display: flex; justify-content: center; align-items: center">
+        <form action="" method="post" class="form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" required class="form-control">
+            </div> <br>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="text" name="password" required class="form-control">
+            </div> <br>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .form{
+            padding: 3em;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin: 1em;
+            width: 400px;
+        }
+    </style>
+{% endblock %}
